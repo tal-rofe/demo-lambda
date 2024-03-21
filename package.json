@@ -1,0 +1,28 @@
+{
+	"name": "demo",
+	"version": "1.0.0",
+	"description": "ddd",
+	"private": true,
+	"license": "UNLICENSED",
+	"author": "hhh <dev@hhh.io> (https://jjj.io)",
+	"type": "module",
+	"nx": {},
+	"scripts": {
+		"cluster:start": "pnpm exec ./docker/scripts/start-cluster.sh",
+		"cluster:stop": "pnpm exec ./docker/scripts/stop-cluster.sh",
+		"cluster:restart": "pnpm exec ./docker/scripts/restart-cluster.sh"
+	},
+	"devDependencies": {
+		"@types/node": "20.11.26",
+		"chalk": "5.3.0",
+		"open": "10.1.0",
+		"pnpm": "8.15.4",
+		"typescript": "5.4.2",
+		"wait-on": "7.2.0"
+	},
+	"packageManager": "pnpm@8.15.4",
+	"engines": {
+		"pnpm": "8.15.4",
+		"node": "20.11.1"
+	}
+}

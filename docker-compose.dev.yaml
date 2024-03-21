@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+    demo:
+        build:
+            context: .
+            dockerfile: ./docker/Dockerfile.demo-dev
+        ports:
+            - '3000:3000'
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+            - ${PWD}/apps/demo-lambda/build:${PWD}${PWD}/apps/demo-lambda/build:ro
+            - ${PWD}/apps/demo-lambda/node_modules
+            - ${PWD}/node_modules
+        environment:
+            SAM_CLI_TELEMETRY: 0
+            SAM_CLI_CONTAINER_CONNECTION_TIMEOUT: 30
+            sam_local_environment: 'true'
+
+networks:
+    dashboard_network:
+        driver: bridge

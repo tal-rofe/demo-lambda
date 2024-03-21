@@ -1,0 +1,37 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: SAM template
+
+Globals:
+    Api:
+        Cors:
+            AllowMethods: "'POST,OPTIONS'"
+            AllowHeaders: "'content-type','x-api-key','x-amz-security-token','authorization','x-amz-user-agent','x-amz-date'"
+            AllowOrigin: "'*'"
+            AllowCredentials: "'*'"
+
+Resources:
+    AwsApiGateway:
+        Type: AWS::Serverless::HttpApi
+        Properties:
+            Name: AWS API Gateway
+            StageName: development
+
+    DemoFunction:
+        Type: 'AWS::Serverless::Function'
+        Properties:
+            Runtime: nodejs20.x
+            Handler: index.handler
+            CodeUri: build
+            Timeout: 30
+            Description: 'Demo Lambda function'
+            Environment:
+                Variables:
+                    sam_local_environment: 'true'
+            Events:
+                Api:
+                    Type: HttpApi
+                    Properties:
+                        ApiId: !Ref AwsApiGateway
+                        Path: /
+                        Method: POST
